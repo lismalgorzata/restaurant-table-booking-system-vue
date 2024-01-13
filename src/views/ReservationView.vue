@@ -21,6 +21,11 @@
                     <button class="deleteBtn" @click="deleteReservation(index)">Delete</button>
                     </div>
                 </li>
+                  <li class="li" v-for="reservation in reservations" :key="reservation.reservationId">
+                    <!-- Tutaj wyświetlamy szczegóły rezerwacji -->
+                    Reservation ID: {{ reservation.reservationId }}, Date: {{ reservation.date }}
+                    <!-- Możesz dodać więcej informacji o rezerwacji tutaj -->
+                  </li>
                 </ul>
             </div>
         </div>
@@ -28,8 +33,9 @@
   </template>
   
   <script setup>
-  import { ref } from 'vue';
+  import { ref, onMounted } from 'vue';
   import { useRouter } from 'vue-router';
+  import ApiService from '@/services/api';
   
   const router = useRouter();
   const editingIndex = ref(null);
@@ -51,6 +57,19 @@
   const deleteReservation = (index) => {
     items.value[index].deleted = true;
   };
+
+  const reservations = ref([]);
+
+  const fetchReservations = async () => {
+    try {
+      const response = await ApiService.getAllReservations();
+      reservations.value = response.data;
+    } catch (error) {
+      console.error("Error while fetching reservations:", error);
+    }
+  };
+
+  onMounted(fetchReservations);
   </script>
   
   <style scoped>
