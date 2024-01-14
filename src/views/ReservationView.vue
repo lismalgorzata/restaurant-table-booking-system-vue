@@ -14,17 +14,14 @@
             <div class="allReservations">
                 <h1>All Reservations</h1>
                 <ul class="ul">
-                <li class="li" v-for="(item, index) in items" :key="index">
-                    <span :class="{ crossedOut: item.deleted }">{{ item.text }}</span>
-                    <div class="btn">
-                    <button class="editBtn" @click="editReservation(index)">Edit</button>
-                    <button class="deleteBtn" @click="deleteReservation(index)">Delete</button>
-                    </div>
-                </li>
                   <li class="li" v-for="reservation in reservations" :key="reservation.reservationId">
-                    <!-- Tutaj wyświetlamy szczegóły rezerwacji -->
-                    Reservation ID: {{ reservation.reservationId }}, Date: {{ reservation.date }}
-                    <!-- Możesz dodać więcej informacji o rezerwacji tutaj -->
+                    <span :class="{ crossedOut: reservation.deleted }">
+                      Reservation ID: {{ reservation.reservationId }}, Date: {{ reservation.date }}
+                    </span>
+                    <div class="btn">
+                      <button class="editBtn" @click="editReservation(index)">Edit</button>
+                      <button class="deleteBtn" @click="deleteReservation(index)">Delete</button>
+                    </div>
                   </li>
                 </ul>
             </div>

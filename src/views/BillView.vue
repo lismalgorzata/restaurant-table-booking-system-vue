@@ -7,8 +7,8 @@
       <div class="allBills">
         <h1>All Bills</h1>
         <ul class="ul">
-          <li class="li" v-for="(item, index) in items" :key="index">
-            {{ item }}
+          <li class="li" v-for="bill in bills" :key="bill.billId">
+            Bill ID: {{ bill.billId }}, Date: {{ bill.date }}
             <div class="btn">
               <button class="editBtn" @click="editBill(index)">Edit</button>
             </div>
@@ -19,8 +19,9 @@
   </template>
   
   <script setup>
-  import { ref } from 'vue';
+  import {onMounted, ref} from 'vue';
   import { useRouter } from 'vue-router';
+  import ApiService from "@/services/api";
   
   const router = useRouter();
   const editingIndex = ref(null);
@@ -35,6 +36,19 @@
     // później do dodania jeszcze /billId czy cos
     router.push({ name: 'editBillForm'});
   };
+
+  const bills = ref([]);
+
+  const fetchBills = async () => {
+    try {
+      const response = await ApiService.getAllBills();
+      bills.value = response.data;
+    } catch (error) {
+      console.error("Error while fetching bills:", error);
+    }
+  };
+
+  onMounted(fetchBills);
   </script>
   
   <style scoped>
