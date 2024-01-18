@@ -44,10 +44,10 @@ const dishes = ref([]);
 const bill = {
     billPrice: null,
     isPayed: false,
-    listOfDishes: '',
+    listOfDishes: [],
     reservation: '',
     date: '',
-    waiterId: ''
+    waiter: ''
 };
 
 const addBill = async () => {
@@ -69,7 +69,7 @@ const fetchDishes = async () => {
 };
 
 const calculateTotalPrice = () => {
-    return listOfDishes.value.reduce((total, dish) => total + dish.dishPrice, 0);
+    return bill.listOfDishes.reduce((total, dish) => total + dish.dishPrice, 0);
 };
 
 onMounted(fetchDishes);
