@@ -45,6 +45,10 @@ export default {
 
     getAllWaiters() {
         return axios.get(`${baseURL}/waiter/all`);
+    },
+
+    getAllWaiterNames() {
+        return axios.get(`${baseURL}/waiter/allNames`)
     }
 
 };
