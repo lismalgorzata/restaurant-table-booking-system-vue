@@ -1,22 +1,23 @@
 <template>
-    <div>
-      <div @click="goToAddForm" class="addBill">
-        Add New Bill
+    <div class="row">
+      <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+          <h1>All Bills</h1>
+          <ul class="ul">
+            <li class="li" v-for="bill in bills" :key="bill.billId">
+              Bill ID: {{ bill.billId }}, Date: {{ bill.date }}
+              <div class="btn">
+                <button class="editBtn" @click="editBill(index)">Edit</button>
+              </div>
+            </li>
+          </ul>
       </div>
-  
-      <div class="allBills">
-        <h1>All Bills</h1>
-        <ul class="ul">
-          <li class="li" v-for="bill in bills" :key="bill.billId">
-            Bill ID: {{ bill.billId }}, Date: {{ bill.date }}
-            <div class="btn">
-              <button class="editBtn" @click="editBill(index)">Edit</button>
-            </div>
-          </li>
-        </ul>
+      <div class="col-md-6">
+        <div @click="goToAddForm" class="addBill">
+          Add New Bill
+        </div>
       </div>
     </div>
-  </template>
+</template>
   
   <script setup>
   import {onMounted, ref} from 'vue';

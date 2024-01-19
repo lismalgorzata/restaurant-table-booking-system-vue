@@ -32,7 +32,7 @@
         </div>
         <div class="col-12">
           <div class="form-check">
-            <input class="form-check-input is-invalid" type="checkbox" value="" v-model="bill.isPayed" id="isPayed" aria-describedby="invalidCheck3Feedback" required>
+            <input class="form-check-input is-invalid" type="checkbox" value="" v-model="bill.isPayed" id="isPayed" aria-describedby="invalidCheck3Feedback">
             <label class="form-check-label" for="invalidCheck3">Rozliczony</label>
           </div>
         </div>
@@ -72,6 +72,7 @@ export default {
           date: '',
           waiterId: null,
         };
+        this.goToAllBills();
       } catch (error) {
         console.error('Error during adding bill', error);
       }
@@ -85,7 +86,11 @@ export default {
         console.error('Error during fetching waiters names', error);
       }
     },
+    goToAllBills() {
+        this.$router.push({ name: 'bill' });
+    },
   },
+
   mounted() {
     this.fetchWaitersNames();
   }
