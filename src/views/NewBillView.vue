@@ -4,7 +4,7 @@
         <form @submit.prevent="addBill">
             <label for="listOfDishes">Select Dishes:</label>
             <select v-model="bill.listOfDishes" multiple required>
-                <option v-for="dish in dishes.value" :key="dish.dishId" :value="dish">
+                <option v-for="dish in dishes" :key="dish.dishId" :value="dish">
                 {{ dish.dishName }} - {{ dish.dishPrice }} PLN
                 </option>
             </select>
@@ -62,7 +62,6 @@ const addBill = async () => {
 const fetchDishes = async () => {
     try {
         const response = await api.getAllDishes();
-        console.log('API Response: ', response.data);
         dishes.value = response.data;
     } catch (error) {
         console.error("Error while fetching dishes:", error);
@@ -70,7 +69,6 @@ const fetchDishes = async () => {
 };
 
 const calculateTotalPrice = () => {
-    console.log('List of dishes: ', bill.listOfDishes);
     return bill.listOfDishes.reduce((total, dish) => total + dish.dishPrice, 0);
 };
 
