@@ -69,7 +69,7 @@ const fetchDishes = async () => {
 };
 
 const calculateTotalPrice = () => {
-    return listOfDishes.value.reduce((total, dish) => total + dish.dishPrice, 0);
+    return selectedDishes.value.reduce((total, dish) => total + dish.dishPrice, 0);
 };
 
 onMounted(fetchDishes);
