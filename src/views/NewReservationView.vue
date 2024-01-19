@@ -20,8 +20,7 @@ export default {
       reservation: {
         date: '',
         tableId: null,
-        customerId: null,
-        customerSurname:'',
+        customerSurname: '',
         customerPhone: null,
       },
     };
@@ -29,29 +28,24 @@ export default {
   methods: {
     async addReservation() {
       try {
-        // Ensure customerSurname is not null or empty
-        if (!this.reservation.customerSurname) {
-          console.error('Nazwisko klienta nie może być puste.');
-          return; // Exit the method if customerSurname is not provided
-        }
+        // Convert to string
+        const customerSurname = String(this.reservation.customerSurname);
+        const customerPhone = String(this.reservation.customerPhone);
 
-        // First, add the customer
-        const customerResponse = await api.addCustomer({
-          customerSurname: String(this.reservation.customerSurname),
-          customerPhone: String(this.reservation.customerPhone),
+        const reservationResponse = await api.addReservation({
+          date: this.reservation.date,
+          tableId: this.reservation.tableId,
+          customerSurname: customerSurname,
+          customerPhone: customerPhone,
         });
 
-        // Now, add the reservation
-        const reservationResponse = await api.addReservation(this.reservation);
-
         console.log('Rezerwacja dodana', reservationResponse.data);
-        
+
         // Reset form
         this.reservation = {
           date: '',
           tableId: null,
-          customerId: null,
-          customerSurname:'',
+          customerSurname: '',
           customerPhone: null,
         };
       } catch (error) {
