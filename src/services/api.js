@@ -26,6 +26,10 @@ export default {
     getAllCustomers() {
         return axios.get(`${baseURL}/customer/all`);
     },
+    
+    addCustomer(customer) {
+        return axios.post(`${baseURL}/customer/add`, customer)
+    },
 
     getAllDishes() {
         return axios.get(`${baseURL}/dish/all`);

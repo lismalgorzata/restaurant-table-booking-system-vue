@@ -1,51 +1,63 @@
 <template>
-    <div>
-      <h2>New Reservation Form</h2>
-      <form @submit.prevent="addReservation">
-        <label for="customerId">Customer ID:</label>
-        <input v-model="reservation.customerId" type="text" required />
-  
-        <label for="date">Date:</label>
-        <input v-model="reservation.date" type="date" required />
-  
-        <label for="hour">Hour:</label>
-        <input v-model="reservation.hour" type="time" required />
-  
-        <label for="tableId">Table ID:</label>
-        <input v-model="reservation.tableId" type="text" required />
-  
-        <label for="billId">Bill ID:</label>
-        <input v-model="reservation.billId" type="text" required />
-  
-        <button type="submit">Add Reservation</button>
-      </form>
-    </div>
-  </template>
-  
-  <script setup>
-  import api from '@/services/api.js';
-  
-  const reservation = {
-    customerId: '',
-    date: '',
-    hour: '',
-    tableId: '',
-    billId: ''
-  };
-  
-  const addReservation = async () => {
-    try {
-      const response = await api.addReservation(reservation);
-      console.log('New Reservation Added:', response.data);
-      // Dodaj logikę do obsługi sukcesu, np. wyświetlanie komunikatu
-    } catch (error) {
-      console.error('Error adding reservation:', error);
-      // Dodaj logikę do obsługi błędu, np. wyświetlanie komunikatu
-    }
-  };
-  </script>
-  
-  <style scoped>
-    /* Dodaj stylizację według potrzeb */
-  </style>
-  
+  <div>
+    <h2>Dodaj rezerwację</h2>
+    <form @submit.prevent="addReservation">
+      <input v-model="reservation.date" type="datetime-local" />
+      <input v-model="reservation.tableId" type="number" placeholder="Id Stolika" />
+      <input v-model="reservation.customerSurname" type="text" placeholder="Nazwisko klienta" />
+      <input v-model="reservation.customerPhone" type="number" placeholder="Telefon klienta" />
+      <button type="submit">Dodaj rezerwację</button>
+    </form>
+  </div>
+</template>
+
+<script>
+import api from "@/services/api";
+
+export default {
+  data() {
+    return {
+      reservation: {
+        date: '',
+        tableId: null,
+        customerId: null,
+        customerSurname:'',
+        customerPhone: null,
+      },
+    };
+  },
+  methods: {
+    async addReservation() {
+      try {
+        // Ensure customerSurname is not null or empty
+        if (!this.reservation.customerSurname) {
+          console.error('Nazwisko klienta nie może być puste.');
+          return; // Exit the method if customerSurname is not provided
+        }
+
+        // First, add the customer
+        const customerResponse = await api.addCustomer({
+          customerSurname: String(this.reservation.customerSurname),
+          customerPhone: String(this.reservation.customerPhone),
+        });
+
+        // Now, add the reservation
+        const reservationResponse = await api.addReservation(this.reservation);
+
+        console.log('Rezerwacja dodana', reservationResponse.data);
+        
+        // Reset form
+        this.reservation = {
+          date: '',
+          tableId: null,
+          customerId: null,
+          customerSurname:'',
+          customerPhone: null,
+        };
+      } catch (error) {
+        console.error('Błąd podczas dodawania rezerwacji', error);
+      }
+    },
+  },
+};
+</script>
