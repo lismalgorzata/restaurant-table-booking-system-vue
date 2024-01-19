@@ -5,7 +5,7 @@ import BillView from '@/views/BillView.vue';
 import NewBillView from '@/views/NewBillView.vue';
 import EditBillView from '@/views/EditBillView.vue';
 import NewReservationView from '@/views/NewReservationView.vue';
-import EditReservationView from '@/views/EditReservationView.vue';
+
 
 const routes = [
   { path: '/', name: 'home', component: HomeView },
@@ -14,7 +14,6 @@ const routes = [
   { path: '/new-bill-form', name: 'newBillForm', component: NewBillView},
   { path: '/edit-bill-form', name: 'editBillForm', component: EditBillView},
   { path: '/new-reservation-form', name: 'newReservationForm', component: NewReservationView},
-  { path: '/edit-reservation-form', name: 'editReservationForm', component: EditReservationView}
 ];
 
 const router = createRouter({

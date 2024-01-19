@@ -1,11 +1,5 @@
 <template>
     <div class="container">
-        <div class="tables">
-            Tables
-        </div>
-        <div class="dates">
-            Dates
-        </div>
         <div class="reservations">
             <div @click="goToAddForm" class="addReservation">
                 Add New Reservation
@@ -15,12 +9,11 @@
                 <h1>All Reservations</h1>
                 <ul class="ul">
                   <li class="li" v-for="reservation in reservations" :key="reservation.reservationId">
-                    <span :class="{ crossedOut: reservation.deleted }">
+                    <span>
                       Reservation ID: {{ reservation.reservationId }}, Date: {{ reservation.date }}
                     </span>
                     <div class="btn">
-                      <button class="editBtn" @click="editReservation(index)">Edit</button>
-                      <button class="deleteBtn" @click="deleteReservation(index)">Delete</button>
+                      <button class="deleteBtn" @click="deleteReservation(reservation.reservationId)">Delete</button>
                     </div>
                   </li>
                 </ul>
@@ -30,59 +23,54 @@
   </template>
   
   <script setup>
-  import { ref, onMounted } from 'vue';
-  import { useRouter } from 'vue-router';
-  import ApiService from '@/services/api';
-  
-  const router = useRouter();
-  const editingIndex = ref(null);
-  const items = ref([
-    { text: 'Item 1', deleted: false },
-    { text: 'Item 2', deleted: false },
-    { text: 'Item 3', deleted: false },
-  ]);
-  
-  const goToAddForm = () => {
-    router.push({ name: 'newReservationForm' });
-  };
-  
-  const editReservation = (index) => {
-    editingIndex.value = index;
-    router.push({ name: 'editReservationForm' });
-  };
-  
-  const deleteReservation = (index) => {
-    items.value[index].deleted = true;
-  };
+    import { ref, onMounted } from 'vue';
+    import { useRouter } from 'vue-router';
+    import ApiService from '@/services/api';
 
-  const reservations = ref([]);
+    const router = useRouter();
 
-  const fetchReservations = async () => {
-    try {
-      const response = await ApiService.getAllReservations();
-      reservations.value = response.data;
-    } catch (error) {
-      console.error("Error while fetching reservations:", error);
-    }
-  };
+    const goToAddForm = () => {
+      router.push({ name: 'newReservationForm' });
+    };
 
-  onMounted(fetchReservations);
+    const deleteReservation = async (reservationId) => {
+      try {
+        // Call the deleteReservation function from the API
+        await ApiService.deleteReservation(reservationId);
+        console.log(`Reservation with ID ${reservationId} deleted successfully.`);
+
+        // Update the reservations list by removing the deleted reservation
+        reservations.value = reservations.value.filter(
+          (reservation) => reservation.reservationId !== reservationId
+        );
+      } catch (error) {
+        console.error(`Error deleting reservation with ID ${reservationId}:`, error);
+        // Handle errors or show a notification to the user.
+      }
+    };
+
+    const reservations = ref([]);
+
+    const fetchReservations = async () => {
+      try {
+        const response = await ApiService.getAllReservations();
+        reservations.value = response.data;
+      } catch (error) {
+        console.error("Error while fetching reservations:", error);
+      }
+    };
+
+    onMounted(fetchReservations);
   </script>
   
   <style scoped>
   .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-start;
     padding: 20px; /* Adjust as needed */
   }
 
-  .tables,
-  .dates,
-  .reservations {
-    width: calc(33.33% - 10px); /* Adjust the width and margin as needed */
-    margin-right: 10px; /* Adjust as needed */
-  }
   .addReservation {
     padding: 15px 30px;
     font-size: 16px;
@@ -127,17 +115,6 @@
     justify-content: center;
     gap: 7px;
   }
-  .editBtn {
-    background-color: rgb(93, 74, 53);
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  .editBtn:hover {
-    background-color: antiquewhite;
-    color: rgb(93, 74, 53);
-  }
   .deleteBtn {
     background-color: rgb(93, 74, 53);
     color: white;
@@ -148,7 +125,4 @@
   .deleteBtn:hover {
     background-color: rgb(255, 0, 0);
   }  
-  .crossedOut {
-    text-decoration: line-through;
-  }
 </style>
