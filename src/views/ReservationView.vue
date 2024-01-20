@@ -48,7 +48,7 @@
                   <button class="editBtn btn btn-primary" @click="editReservation(index)">Edit</button>
                 </div>
                 <div class="col-md-2">
-                  <button class="deleteBtn btn btn-danger" @click="deleteReservation(index)">Delete</button>
+                  <button class="deleteBtn btn btn-danger" @click="deleteReservation(reservation.reservationId)">Delete</button>
                 </div>
               </div>
             </div>
@@ -81,8 +81,20 @@ const editReservation = (index) => {
   router.push({name: 'editReservationForm'});
 };
 
-const deleteReservation = (index) => {
-  items.value[index].deleted = true;
+const deleteReservation = async (reservationId) => {
+  try {
+    // Call the deleteReservation function from the API
+    await ApiService.deleteReservation(reservationId);
+    console.log(`Reservation with ID ${reservationId} deleted successfully.`);
+
+    // Update the reservations list by removing the deleted reservation
+    reservations.value = reservations.value.filter(
+        (reservation) => reservation.reservationId !== reservationId
+    );
+  } catch (error) {
+    console.error(`Error deleting reservation with ID ${reservationId}:`, error);
+    // Handle errors or show a notification to the user.
+  }
 };
 
 const reservations = ref([]);
