@@ -45,9 +45,6 @@
               </div>
               <div class="row">
                 <div class="col-md-2">
-                  <button class="editBtn btn btn-primary" @click="editReservation(index)">Edit</button>
-                </div>
-                <div class="col-md-2">
                   <button class="deleteBtn btn btn-danger" @click="deleteReservation(reservation.reservationId)">Delete</button>
                 </div>
               </div>
@@ -65,20 +62,9 @@ import {useRouter} from 'vue-router';
 import ApiService from '@/services/api';
 
 const router = useRouter();
-const editingIndex = ref(null);
-const items = ref([
-  {text: 'Item 1', deleted: false},
-  {text: 'Item 2', deleted: false},
-  {text: 'Item 3', deleted: false},
-]);
 
 const goToAddForm = () => {
   router.push({name: 'newReservationForm'});
-};
-
-const editReservation = (index) => {
-  editingIndex.value = index;
-  router.push({name: 'editReservationForm'});
 };
 
 const deleteReservation = async (reservationId) => {
@@ -117,19 +103,6 @@ onMounted(fetchReservations);
 </script>
 
 <style scoped>
-.container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 20px; /* Adjust as needed */
-}
-
-.tables,
-.dates,
-.reservations {
-  width: calc(33.33% - 10px); /* Adjust the width and margin as needed */
-  margin-right: 10px; /* Adjust as needed */
-}
 .title-allReservations {
   color: #332920;
   text-transform: uppercase;
@@ -153,50 +126,12 @@ onMounted(fetchReservations);
   color: #332920;
 }
 
-.allReservations {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
-}
-
-.ul {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  gap: 1rem;
-}
-
-.ul li {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  border-radius: 5px;
-  padding-left: 1rem;
-  background-color: rgb(204, 204, 204);
-}
-
 .btn {
   display: flex;
   justify-content: center;
   gap: 7px;
 }
 
-.editBtn {
-  background-color: rgb(93, 74, 53);
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.editBtn:hover {
-  background-color: antiquewhite;
-  color: rgb(93, 74, 53);
-}
 
 .deleteBtn {
   background-color: rgb(93, 74, 53);
@@ -208,9 +143,5 @@ onMounted(fetchReservations);
 
 .deleteBtn:hover {
   background-color: rgb(255, 0, 0);
-}
-
-.crossedOut {
-  text-decoration: line-through;
 }
 </style>
