@@ -11,6 +11,11 @@ export default {
         return axios.post(`${baseURL}/reservation/add`, reservation);
     },
 
+    deleteReservation(reservationId) {
+    return axios.delete(`${baseURL}/reservation/delete/${reservationId}`);
+},
+
+
     getAllBills() {
         return axios.get(`${baseURL}/bill/all`);
     },
