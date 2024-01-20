@@ -63,10 +63,24 @@
           </div>
         </div>
         <div class="row mb-3">
-          <div class="form-check">
+          <div class="form-check mt-2">
             <input class="form-check-input is-invalid" type="checkbox" value="" v-model="bill.isPayed" id="isPayed"
                    aria-describedby="invalidCheck3Feedback">
             <label class="form-check-label" for="invalidCheck3">Rozliczony</label>
+          </div>
+          <div class="form-check mt-2">
+            <input class="form-check-input is-invalid" type="checkbox" v-model="hasReservation" value="" id="isPayed"
+                   aria-describedby="invalidCheck3Feedback" >
+            <label class="form-check-label" for="invalidCheck3">Rezerwacja</label>
+          </div>
+          <div v-if="hasReservation">
+            <select v-model="bill.reservationId" class="form-select mt-3" required aria-label="select example">
+              <option value="">Wybierz rezerwację</option>
+              <option v-for="reservation in reservations" :key="reservation.reservationId" :value="reservation.reservationId">
+                {{ formatDate(reservation.date) }} - {{ reservation.customerSurname }} - Stolik numer {{ reservation.table.tableId }}
+              </option>
+            </select>
+            <div class="invalid-feedback mb-3">Proszę wybrać rezerwację</div>
           </div>
         </div>
         <div class="row mb-3">
@@ -82,6 +96,7 @@
 
 <script>
 import api from "@/services/api";
+import {ref} from "vue";
 
 export default {
   data() {
@@ -96,8 +111,11 @@ export default {
       },
       waiters: [],
       dishes: [],
+      reservations: [],
+      hasReservation: false
     };
   },
+
   methods: {
     async addBill() {
       try {
@@ -135,6 +153,15 @@ export default {
         console.error('Error during fetching dishes', error);
       }
     },
+    async fetchAllReservations() {
+      try {
+        const response = await api.getAllReservations();
+        this.reservations = response.data;
+        console.log(this.reservations);
+      } catch (error) {
+        console.error('Error during fetching reservations', error);
+      }
+    },
     goToAllBills() {
       this.$router.push({name: 'bill'});
     },
@@ -142,12 +169,22 @@ export default {
     addDishToList(dish) {
       this.bill.listOfDishes.push(dish);
       this.bill.billPrice += dish.dishPrice;
+    },
+
+    toggleReservation() {
+      this.hasReservation = !this.hasReservation;
+    },
+
+    formatDate(dateString) {
+      const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+      return new Date(dateString).toLocaleDateString('pl-PL', options);
     }
   },
 
   mounted() {
     this.fetchAllDishes();
     this.fetchWaitersNames();
+    this.fetchAllReservations();
   }
 };
 </script>
