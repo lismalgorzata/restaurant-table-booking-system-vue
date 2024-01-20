@@ -11,7 +11,7 @@
             </div>
             <div class="col-md-6">
               <div class="col text-end">
-                <button @click="addDishToList(dish)" class="btn btn-primary" type="submit">Add dish</button>
+                <button @click="addDishToList(dish)" class="btn btn-secondary" type="submit">Dodaj danie</button>
               </div>
             </div>
           </div>
@@ -20,7 +20,7 @@
     </div>
     <div class="col-md-6">
       <div class="row">
-        <h2 class="mb-5">Dodaj rachunek</h2>
+        <h2 class="mb-5">Nowy rachunek</h2>
       </div>
       <form @submit.prevent="addBill" class="row g-3 was-validated">
         <div class="row mb-3">
@@ -70,7 +70,10 @@
           </div>
         </div>
         <div class="row mb-3">
-          <button class="btn btn-primary" type="submit">Dodaj rachunek</button>
+          <button class="btn btn-secondary" type="submit">Dodaj rachunek</button>
+        </div>
+        <div class="row mb-3">
+          <button class="btn btn-secondary" @click="goToAllBills">Powrót</button>
         </div>
       </form>
     </div>
@@ -89,6 +92,7 @@ export default {
         listOfDishes: [],
         date: '',
         waiterId: null,
+        reservationId: null
       },
       waiters: [],
       dishes: [],
@@ -106,6 +110,7 @@ export default {
           listOfDishes: '',
           date: '',
           waiterId: null,
+          reservationId: null
         };
         this.goToAllBills();
       } catch (error) {
