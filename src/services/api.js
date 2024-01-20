@@ -28,6 +28,10 @@ export default {
         return axios.put(`${baseURL}/bill/edit/${billId}`, bill);
     },
 
+    getBill(billId) {
+        return axios.get(`${baseURL}/bill/${billId}`);
+    },
+
     getAllDishes() {
         return axios.get(`${baseURL}/dish/all`);
     },
@@ -51,5 +55,4 @@ export default {
     getAllWaiterNames() {
         return axios.get(`${baseURL}/waiter/allNames`)
     }
-
 };

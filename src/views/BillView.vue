@@ -95,7 +95,7 @@
                 <h5 class="card-text text-end">{{ bill.billPrice }} PLN</h5>
               </div>
               <div class="text-start">
-                <button class="editBtn" @click="editBill(index)">Edit</button>
+                <button class="editBtn" @click="editBill(bill.billId)">Edit</button>
               </div>
             </div>
           </div>
@@ -111,17 +111,13 @@ import {useRouter} from 'vue-router';
 import ApiService from "@/services/api";
 
 const router = useRouter();
-const editingIndex = ref(null);
-const items = ref(['Item 1', 'Item 2', 'Item 3']);
 
 const goToAddForm = () => {
   router.push({name: 'newBillForm'});
 };
 
-const editBill = (index) => {
-  editingIndex.value = index;
-  // później do dodania jeszcze /billId czy cos
-  router.push({name: 'editBillForm'});
+const editBill = (billId) => {
+  router.push({name: 'editBillForm', params: { billId }});
 };
 
 const bills = ref([]);
