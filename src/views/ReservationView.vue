@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-9">
       <div class="col-md-10">
-        <h1 class="text-end">All Reservations</h1>
+        <h1 class="text-end title-allReservations">All Reservations</h1>
       </div>
       <div class="col-md-2">
       </div>
@@ -35,7 +35,7 @@
                       <p class="text-start">{{ reservation.customerSurname }}</p>
                     </div>
                     <div class="row">
-                      <h7 class="text-start">Numer telefonu: {{ reservation.customerPhone }}</h7>
+                      <h6 class="text-start">Numer telefonu: {{ reservation.customerPhone }}</h6>
                     </div>
                   </li>
                   <li class="list-group-item">
@@ -130,21 +130,27 @@ onMounted(fetchReservations);
   width: calc(33.33% - 10px); /* Adjust the width and margin as needed */
   margin-right: 10px; /* Adjust as needed */
 }
-
+.title-allReservations {
+  color: #332920;
+  text-transform: uppercase;
+  font-family: Copperplate,fantasy;
+}
 .addReservation {
   padding: 15px 30px;
   font-size: 16px;
   background-color: white;
-  border: 2px solid rgb(93, 74, 53);
+  border: 2px solid #332920;
   border-radius: 20px;
-  color: rgb(93, 74, 53);
+  color: #574F47;
   border-radius: 20px;
   cursor: pointer;
   text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .addReservation:hover {
-  background-color: antiquewhite;
+  background-color: #BD946D;
+  color: #332920;
 }
 
 .allReservations {
