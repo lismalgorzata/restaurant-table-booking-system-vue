@@ -66,21 +66,27 @@
           <div class="form-check mt-2">
             <input class="form-check-input is-invalid" type="checkbox" value="" v-model="bill.isPayed" id="isPayed"
                    aria-describedby="invalidCheck3Feedback">
-            <label class="form-check-label" for="invalidCheck3">Rozliczony</label>
+            <label class="form-check-label" for="isPayed">Rozliczony</label>
+            <div v-if="bill.isPayed">
+              <p>Rachunek rozliczony.</p>
+            </div>
           </div>
           <div class="form-check mt-2">
-            <input class="form-check-input is-invalid" type="checkbox" v-model="hasReservation" value="" id="isPayed"
+            <input class="form-check-input is-invalid" type="checkbox" v-model="hasReservation" value="" id="hasReservation"
                    aria-describedby="invalidCheck3Feedback" >
-            <label class="form-check-label" for="invalidCheck3">Rezerwacja</label>
+            <label class="form-check-label" for="hasReservation">Rezerwacja</label>
           </div>
           <div v-if="hasReservation">
-            <select v-model="bill.reservationId" class="form-select mt-3" required aria-label="select example">
+            <select v-model="bill.reservationId" class="form-select mt-3" aria-label="select example" required>
               <option value="">Wybierz rezerwację</option>
               <option v-for="reservation in reservations" :key="reservation.reservationId" :value="reservation.reservationId">
                 {{ formatDate(reservation.date) }} - {{ reservation.customerSurname }} - Stolik numer {{ reservation.table.tableId }}
               </option>
             </select>
             <div class="invalid-feedback mb-3">Proszę wybrać rezerwację</div>
+          </div>
+          <div v-else>
+
           </div>
         </div>
         <div class="row mb-3">
@@ -90,6 +96,9 @@
           <button class="btn btn-secondary" @click="goToAllBills">Powrót</button>
         </div>
       </form>
+      <div>
+        {{ bill }}
+      </div>
     </div>
   </div>
 </template>

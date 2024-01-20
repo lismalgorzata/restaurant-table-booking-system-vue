@@ -26,14 +26,14 @@
                 </div>
                 <div class="col-md-4">
                   <div class="d-flex justify-content-end">
-                    <button v-if="bill.isPayed" type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Rezerwacja stolika">
+                    <button v-if="bill.isPayed === false" type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Rezerwacja stolika">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar2-check" viewBox="0 0 16 16">
                         <path d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
                         <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/>
                         <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5z"/>
                       </svg>
                     </button>
-                    <button v-if="bill.reservation" type="button" class="btn btn-outline-danger mx-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Rachunek nie został opłacony">
+                    <button v-if="bill.reservation != null" type="button" class="btn btn-outline-danger mx-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Rachunek nie został opłacony">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
                         <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
@@ -75,7 +75,7 @@
                       </div>
                     </div>
                     <div class="col-md-5">
-                      <div class="form-check text-start" v-if="bill.isPayed != true">
+                      <div class="form-check text-start" v-if="bill.isPayed === true">
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked style="pointer-events: none; opacity: 1;">
                         <label class="form-check-label" for="flexCheckDefault">
                           Rozliczony
