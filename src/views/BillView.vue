@@ -92,7 +92,7 @@
                 </ul>
               </div>
               <div class="row">
-                <h5 class="card-text text-end">{{ bill.billPrice }}</h5>
+                <h5 class="card-text text-end">{{ bill.billPrice }} PLN</h5>
               </div>
               <div class="text-start">
                 <button class="editBtn" @click="editBill(index)">Edit</button>

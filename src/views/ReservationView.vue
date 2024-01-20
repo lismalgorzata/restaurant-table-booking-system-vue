@@ -31,11 +31,11 @@
                   <li class="list-group-item">
                   </li>
                   <li class="list-group-item">
-                    <div class="col-md-6">
-                      <h6 class="text-start">{{ reservation.customerSurname }}</h6>
+                    <div class="row">
+                      <p class="text-start">{{ reservation.customerSurname }}</p>
                     </div>
-                    <div class="col-md-6">
-                      <h7 class="text-start">{{ reservation.customerPhone }}</h7>
+                    <div class="row">
+                      <h7 class="text-start">Numer telefonu: {{ reservation.customerPhone }}</h7>
                     </div>
                   </li>
                   <li class="list-group-item">
