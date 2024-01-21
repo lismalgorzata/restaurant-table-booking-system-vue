@@ -13,7 +13,34 @@
       </div>
     </div>
   </div>
-
+  <div class="row mt-4 mb-4">
+    <div class="col-md-2 mb-2">
+      <input v-model="filterDate" type="date" class="form-control" id="validationTooltip01" value="" required>
+    </div>
+    <div class="col-md-2 mb-2">
+      <select v-model="filterWaiterId" class="form-select" required aria-label="select example">
+        <option v-for="waiter in waiters" :key="waiter.waiterId" :value="waiter.waiterId">
+          {{ waiter.waiterName }} {{ waiter.waiterSurname }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-1 mb-2 mt-2 d-flex">
+      <input class="form-check-input mx-2" type="checkbox" value="" v-model="filterIsPayed">
+      <label class="form-check-label">Rozliczony</label>
+    </div>
+    <div class="col-md-2 mb-1 mx-3">
+      <button type="button" class="btn btn-outline-dark" @click="fetchBillsByParameters">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
+            <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"/>
+          </svg>
+        </div>
+        <div>
+          Filtruj
+        </div>
+      </button>
+    </div>
+  </div>
   <div class="row mt-3">
     <div class="container-fluid">
       <div class="row">
@@ -131,6 +158,37 @@ const fetchBills = async () => {
   }
 };
 
+const waiters = ref([]);
+
+const fetchWaitersNames = async () => {
+  try {
+    const response = await ApiService.getAllWaiterNames();
+    waiters.value = response.data;
+    console.log(waiters.value);
+  } catch (error) {
+    console.error('Error during fetching waiters names', error);
+  }
+};
+
+const filterDate = ref(null);
+const filterWaiterId = ref(null);
+const filterIsPayed = ref(null);
+const filterReservationId = ref(null);
+
+const fetchBillsByParameters = async () => {
+  try {
+    const response = await ApiService.getBillsByFilter(
+        filterDate.value,
+        filterWaiterId.value,
+        filterIsPayed.value,
+        filterReservationId.value
+    );
+    bills.value = response.data;
+  } catch (error) {
+    console.error("Error while fetching bills with filters:", error);
+  }
+};
+
 const formatDate = (dateString) => {
   const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
   return new Date(dateString).toLocaleDateString('pl-PL', options);
@@ -138,6 +196,7 @@ const formatDate = (dateString) => {
 
 
 onMounted(fetchBills);
+onMounted(fetchWaitersNames);
 </script>
 
 <style scoped>
