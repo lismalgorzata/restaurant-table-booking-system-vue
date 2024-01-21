@@ -34,7 +34,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-4 mt-2" v-for="(reservation, index) in reservations" :key="reservation.reservationId">
-          <div class="card card-setting">
+          <div class="card">
             <div class="card-body">
                 <span :class="{ 'crossedOut': reservation.deleted }">
                   <div class="row">
@@ -44,7 +44,7 @@
                   </div>
                 </span>
               <div class="row">
-                <ul class="list-group list-group-flush card-setting">
+                <ul class="list-group list-group-flush">
                   <li class="list-group-item">
                   </li>
                   <li class="list-group-item">

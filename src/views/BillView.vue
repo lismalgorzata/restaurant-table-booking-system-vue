@@ -45,7 +45,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-4 mt-2" v-for="bill in bills" :key="bill.billId">
-          <div class="card card-setting">
+          <div class="card">
             <div class="card-body">
               <div class="row">
                 <div class="col-md-8">
@@ -80,7 +80,7 @@
                     <p class="card-text">{{ bill.listOfDishes }}</p>
                   </li>
                   <li class="list-group-item">
-                    <div class="col-md-10">
+                    <div class="col-md-7">
                       <div class="form-check text-start" v-if="bill.reservation">
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked style="pointer-events: none; opacity: 1;">
                         <label class="form-check-label" for="flexCheckDefault">
@@ -96,19 +96,19 @@
                           <h8>{{ bill.reservation.customerSurname }}</h8>
                         </div>
                       </div>
-                      <div class="form-check text-start form-bill-input" v-else>
+                      <div class="form-check text-start" v-else>
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="pointer-events: none; opacity: 1;">
                         <label class="form-check-label" for="flexCheckDefault" style="opacity: 1;">Rezerwacja</label>
                       </div>
                     </div>
-                    <div class="col-md-8">
-                      <div class="form-check text-start form-bill-input" v-if="bill.isPayed === true">
+                    <div class="col-md-5">
+                      <div class="form-check text-start" v-if="bill.isPayed === true">
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked style="pointer-events: none; opacity: 1;">
                         <label class="form-check-label" for="flexCheckDefault">
                           Rozliczony
                         </label>
                       </div>
-                      <div class="form-check text-start form-bill-input" v-else>
+                      <div class="form-check text-start" v-else>
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="pointer-events: none; opacity: 1;">
                         <label class="form-check-label" for="flexCheckDefault">
                           Rozliczony
@@ -207,19 +207,18 @@ onMounted(fetchWaitersNames);
 }
 .addBill {
   padding: 15px 30px;
-  font-size: 17px;
-  background-color: #574F47;
-  border: 2px #332920;
+  font-size: 16px;
+  background-color: white;
+  border: 2px solid rgb(93, 74, 53);
   border-radius: 20px;
-  color: #F7F1E6;
+  color: rgb(93, 74, 53);
+  border-radius: 20px;
   cursor: pointer;
   text-align: center;
-  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .addBill:hover {
-  background-color: #F7F1E6;
-  color: #574F47;
+  background-color: antiquewhite;
 }
 
 .allBills {
@@ -229,16 +228,6 @@ onMounted(fetchWaitersNames);
   justify-content: center;
   align-items: center;
   margin-top: 30px;
-}
-
-.card-setting {
-  background-color: #f5f1eb;
-  --bs-list-group-bg: #f5f1eb;
-  border: 0px;
-}
-
-.form-bill-input {
-  padding-left: 0%;
 }
 
 .ul {
@@ -265,13 +254,11 @@ onMounted(fetchWaitersNames);
 }
 
 .editBtn {
-  padding: 7px 30px;
   background-color: rgb(93, 74, 53);
   color: white;
   border: none;
   cursor: pointer;
   border-radius: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .editBtn:hover {
