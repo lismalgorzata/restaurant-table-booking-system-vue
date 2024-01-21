@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-9">
       <div class="col-md-10">
-        <h1 class="text-end">All Reservations</h1>
+        <h1 class="text-end title-allReservations">All Reservations</h1>
       </div>
       <div class="col-md-2">
       </div>
@@ -34,7 +34,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-4 mt-2" v-for="(reservation, index) in reservations" :key="reservation.reservationId">
-          <div class="card">
+          <div class="card card-setting">
             <div class="card-body">
                 <span :class="{ 'crossedOut': reservation.deleted }">
                   <div class="row">
@@ -44,7 +44,7 @@
                   </div>
                 </span>
               <div class="row">
-                <ul class="list-group list-group-flush">
+                <ul class="list-group list-group-flush card-setting">
                   <li class="list-group-item">
                   </li>
                   <li class="list-group-item">
@@ -52,7 +52,7 @@
                       <p class="text-start">{{ reservation.customerSurname }}</p>
                     </div>
                     <div class="row">
-                      <h7 class="text-start">Numer telefonu: {{ reservation.customerPhone }}</h7>
+                      <h6 class="text-start">Numer telefonu: {{ reservation.customerPhone }}</h6>
                     </div>
                   </li>
                   <li class="list-group-item">
@@ -133,27 +133,37 @@ onMounted(fetchReservations);
 </script>
 
 <style scoped>
-
+.title-allReservations {
+  color: #332920;
+  text-transform: uppercase;
+  font-family: Copperplate,fantasy;
+}
 .addReservation {
   padding: 15px 30px;
-  font-size: 16px;
-  background-color: white;
-  border: 2px solid rgb(93, 74, 53);
+  font-size: 17px;
+  background-color: #574F47;
+  border: 2px #332920;
   border-radius: 20px;
-  color: rgb(93, 74, 53);
-  border-radius: 20px;
+  color: #F7F1E6;
   cursor: pointer;
   text-align: center;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .addReservation:hover {
-  background-color: antiquewhite;
+  background-color: #F7F1E6;
+  color: #574F47;
 }
-
+.card-setting, .list-group {
+  background-color: #f5f1eb;
+  --bs-list-group-bg: #f5f1eb;
+  border: 0px;
+}
 .btn {
   display: flex;
   justify-content: center;
   gap: 7px;
+  padding: 7px 30px;
 }
 
 
