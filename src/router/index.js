@@ -12,7 +12,7 @@ const routes = [
   { path: '/reservation', name: 'reservation', component: ReservationView },
   { path: '/bill', name: 'bill', component: BillView },
   { path: '/new-bill-form', name: 'newBillForm', component: NewBillView},
-  { path: '/edit-bill-form', name: 'editBillForm', component: EditBillView},
+  { path: '/edit-bill-form/:billId', name: 'editBillForm', component: EditBillView},
   { path: '/new-reservation-form', name: 'newReservationForm', component: NewReservationView},
 ];
 
