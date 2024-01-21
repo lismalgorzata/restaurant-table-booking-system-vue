@@ -13,8 +13,15 @@ export default {
 
     deleteReservation(reservationId) {
     return axios.delete(`${baseURL}/reservation/delete/${reservationId}`);
-},
+    },
 
+    getReservationsByDate(date) {
+        return axios.get(`${baseURL}/reservation/byDate`, {
+            params: {
+                date: date
+            }
+        });
+    },
 
     getAllBills() {
         return axios.get(`${baseURL}/bill/all`);
@@ -32,12 +39,19 @@ export default {
         return axios.get(`${baseURL}/bill/${billId}`);
     },
 
-    getAllDishes() {
-        return axios.get(`${baseURL}/dish/all`);
+    getBillsByFilter(date, waiterId, isPayed, reservationId) {
+        return axios.get(`${baseURL}/bill/filter`, {
+            params: {
+                date: date,
+                waiterId: waiterId,
+                isPayed: isPayed,
+                reservationId: reservationId
+            }
+        });
     },
 
-    getAllRestaurants() {
-        return axios.get(`${baseURL}/restaurant/all`);
+    getAllDishes() {
+        return axios.get(`${baseURL}/dish/all`);
     },
 
     getAllTables() {
@@ -46,10 +60,6 @@ export default {
 
     getAllFreeTables(date) {
         return axios.get(`${baseURL}/table/allFree?date=${date}`);
-    },
-
-    getAllWaiters() {
-        return axios.get(`${baseURL}/waiter/all`);
     },
 
     getAllWaiterNames() {

@@ -13,10 +13,27 @@
       </div>
     </div>
   </div>
+  <div class="row mt-4 mb-4">
+    <div class="col-md-2 mb-2">
+      <input v-model="filterDate" type="date" class="form-control" id="validationTooltip01" value="" required>
+    </div>
+    <div class="col-md-2 mb-1">
+      <button type="button" class="btn btn-outline-dark" @click="fetchReservationsByDate">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
+            <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"/>
+          </svg>
+        </div>
+        <div>
+          Filtruj
+        </div>
+      </button>
+    </div>
+  </div>
   <div class="row mt-3">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-4 mt-2" v-for="reservation in reservations" :key="reservation.reservationId">
+        <div class="col-md-4 mt-2" v-for="(reservation, index) in reservations" :key="reservation.reservationId">
           <div class="card">
             <div class="card-body">
                 <span :class="{ 'crossedOut': reservation.deleted }">
@@ -97,6 +114,19 @@ const fetchReservations = async () => {
 const formatDate = (dateString) => {
   const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
   return new Date(dateString).toLocaleDateString('pl-PL', options);
+};
+
+const filterDate = ref(null);
+
+const fetchReservationsByDate = async () => {
+  if (filterDate.value) {
+    try {
+      const response = await ApiService.getReservationsByDate(filterDate.value);
+      reservations.value = response.data;
+    } catch (error) {
+      console.error("Error while fetching reservations by date:", error);
+    }
+  }
 };
 
 onMounted(fetchReservations);
