@@ -3,6 +3,9 @@
       <div class="left">
         <img @click="goToMainPage" src="@/assets/logo.png" alt="Logo" class="logo" />
       </div>
+      <div class="header-title">
+        <p class="title">Restaurant Table Booking System</p>
+      </div>
       <div class="right">
         <div @click="goToReservationPage" class="reservationIcon icon">
             <svg 
@@ -84,7 +87,7 @@ const goToBillPage = () => {
     justify-content: space-between;
     padding: 8px 24px;
     border-bottom: 1px solid rgb(93, 74, 53);
-    background-color: rgb(255, 255, 255);
+    background-color: #F7F1E6;
   }
   
 .logo {
@@ -98,6 +101,15 @@ const goToBillPage = () => {
     align-items: center;
   }
   
+.header-title {
+  font-size: 200%;
+  font-family: Helvetica,sans-serif;
+  padding-top: 15px;
+}
+
+.title {
+  color: #332920;
+}
 .right {
     display: flex;
     gap: 50px; 

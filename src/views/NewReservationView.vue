@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-3">
+  <div class="mt-3 form-reservation">
     <form @submit.prevent="addReservation" class="row g-3 was-validated">
       <div class="row mb-3">
         <label for="validationTooltip01" class="form-label">Data</label>
@@ -30,7 +30,7 @@
         <div class="invalid-feedback">Proszę wpisać numer telefonu</div>
       </div>
       <div class="row mb-3">
-        <button class="btn btn-secondary" type="submit">Dodaj rezerwację</button>
+        <button class="button-add" type="submit">Dodaj rezerwację</button>
       </div>
       <div class="invalid-feedback">Proszę wybrać datę</div>
       <div class="row mb-3">
@@ -144,6 +144,31 @@ export default {
 </script>
 
 <style>
+.button-add {
+  background-color: #6FBF32;
+  color: #1C1C1C;
+  border-radius: 5px;
+  padding-top: 0.7%;
+  padding-bottom: 0.7%;
+  border: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.button-add:hover {
+  background-color: #40661A;
+  color: #FAFAFA;
+}
+
+.form-reservation {
+  background-color: #F7F1E6;
+  padding-left: 2.2%;
+  border-radius: 20px;
+  padding-top:2.2%;
+}
+.was-validated {
+  padding-top: 2%;
+  padding-bottom: 0.5%;
+}
 .table-rectangle {
   border: 1px solid #000;
   margin: 10px;
@@ -182,4 +207,5 @@ export default {
 .table-seats-6 {
   width: 130px;
 }
+
 </style>

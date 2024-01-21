@@ -17,7 +17,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-4 mt-2" v-for="reservation in reservations" :key="reservation.reservationId">
-          <div class="card">
+          <div class="card card-setting">
             <div class="card-body">
                 <span :class="{ 'crossedOut': reservation.deleted }">
                   <div class="row">
@@ -27,7 +27,7 @@
                   </div>
                 </span>
               <div class="row">
-                <ul class="list-group list-group-flush">
+                <ul class="list-group list-group-flush card-setting">
                   <li class="list-group-item">
                   </li>
                   <li class="list-group-item">
@@ -110,26 +110,30 @@ onMounted(fetchReservations);
 }
 .addReservation {
   padding: 15px 30px;
-  font-size: 16px;
-  background-color: white;
-  border: 2px solid #332920;
+  font-size: 17px;
+  background-color: #574F47;
+  border: 2px #332920;
   border-radius: 20px;
-  color: #574F47;
-  border-radius: 20px;
+  color: #F7F1E6;
   cursor: pointer;
   text-align: center;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .addReservation:hover {
-  background-color: #BD946D;
-  color: #332920;
+  background-color: #F7F1E6;
+  color: #574F47;
 }
-
+.card-setting, .list-group {
+  background-color: #f5f1eb;
+  --bs-list-group-bg: #f5f1eb;
+  border: 0px;
+}
 .btn {
   display: flex;
   justify-content: center;
   gap: 7px;
+  padding: 7px 30px;
 }
 
 
