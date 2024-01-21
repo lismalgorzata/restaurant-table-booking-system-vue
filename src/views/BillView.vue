@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-9">
       <div class="col-md-9">
-        <h1 class="text-end title-allBills">All Bills</h1>
+        <h1 class="text-end">All Bills</h1>
       </div>
       <div class="col-md-3">
       </div>
@@ -200,11 +200,6 @@ onMounted(fetchWaitersNames);
 </script>
 
 <style scoped>
-.title-allBills {
-  color: #332920;
-  text-transform: uppercase;
-  font-family: Copperplate,fantasy;
-}
 .addBill {
   padding: 15px 30px;
   font-size: 16px;

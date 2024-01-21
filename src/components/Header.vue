@@ -4,7 +4,7 @@
         <img @click="goToMainPage" src="@/assets/logo.png" alt="Logo" class="logo" />
       </div>
       <div class="right">
-        <div @click="goToReservationPage" class="reservationIcon icon">
+        <div @click="goToReservationPage" class="reservationIcon">
             <svg 
                 xmlns="http://www.w3.org/2000/svg" 
                 width="28" 
@@ -21,7 +21,7 @@
                 <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
             </svg>
         </div>
-        <div @click="goToBillPage" class="billIcon icon">
+        <div @click="goToBillPage" class="billIcon">
             <svg 
                 xmlns="http://www.w3.org/2000/svg" 
                 width="28" 
@@ -38,7 +38,7 @@
                 <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
             </svg>
         </div>
-        <div @click="goToMainPage" class="homeIcon icon">
+        <div @click="goToMainPage" class="homeIcon">
           <svg xmlns="http://www.w3.org/2000/svg" 
               width="28" 
               height="28" 
@@ -87,36 +87,28 @@ const goToBillPage = () => {
     background-color: rgb(255, 255, 255);
   }
   
-.logo {
+  .logo {
     cursor: pointer;
     width: 180px;
     height: 120px;
   }
   
-.left {
+  .left {
     display: flex;
     align-items: center;
   }
   
-.right {
+  .right {
     display: flex;
     gap: 50px; 
   }
   
-.reservationIcon, .homeIcon, .billIcon {
+  .reservationIcon, .homeIcon, .billIcon {
     cursor: pointer;
-}
-
-.icon {
-  color: #8A7A6B;
-  transition: background-color 0.2s ease;
-  transition: color 1s ease;
-  transition: transform 0.2s ease-in-out;
-}
-
-.icon:hover {
-  color: #332920;
-  transform: scale(1.2);
+  
+    &:hover {
+      color: rgb(93, 74, 53);
+    }
 }
 </style>
   

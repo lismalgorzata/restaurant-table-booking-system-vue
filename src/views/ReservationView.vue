@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-9">
       <div class="col-md-10">
-        <h1 class="text-end title-allReservations">All Reservations</h1>
+        <h1 class="text-end">All Reservations</h1>
       </div>
       <div class="col-md-2">
       </div>
@@ -61,6 +61,9 @@
                 </ul>
               </div>
               <div class="row">
+                <div class="col-md-2">
+                  <button class="editBtn btn btn-primary" @click="editReservation(index)">Edit</button>
+                </div>
                 <div class="col-md-2">
                   <button class="deleteBtn btn btn-danger" @click="deleteReservation(reservation.reservationId)">Delete</button>
                 </div>
@@ -133,6 +136,19 @@ onMounted(fetchReservations);
 </script>
 
 <style scoped>
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px; /* Adjust as needed */
+}
+
+.tables,
+.dates,
+.reservations {
+  width: calc(33.33% - 10px); /* Adjust the width and margin as needed */
+  margin-right: 10px; /* Adjust as needed */
+}
 .title-allReservations {
   color: #332920;
   text-transform: uppercase;
@@ -140,30 +156,60 @@ onMounted(fetchReservations);
 }
 .addReservation {
   padding: 15px 30px;
-  font-size: 17px;
-  background-color: #574F47;
-  border: 2px #332920;
+  font-size: 16px;
+  background-color: white;
+  border: 2px solid #332920;
   border-radius: 20px;
-  color: #F7F1E6;
+  color: #574F47;
+  border-radius: 20px;
   cursor: pointer;
   text-align: center;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .addReservation:hover {
-  background-color: #F7F1E6;
-  color: #574F47;
+  background-color: #BD946D;
+  color: #332920;
 }
-.card-setting, .list-group {
-  background-color: #f5f1eb;
-  --bs-list-group-bg: #f5f1eb;
-  border: 0px;
+
+.allReservations {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
 }
+
+.ul {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.ul li {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 5px;
+  padding-left: 1rem;
+  background-color: rgb(204, 204, 204);
+}
+
 .btn {
   display: flex;
   justify-content: center;
   gap: 7px;
-  padding: 7px 30px;
+}
+
+.editBtn {
+  background-color: rgb(93, 74, 53);
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 
@@ -177,5 +223,9 @@ onMounted(fetchReservations);
 
 .deleteBtn:hover {
   background-color: rgb(255, 0, 0);
+}
+
+.crossedOut {
+  text-decoration: line-through;
 }
 </style>
