@@ -73,7 +73,7 @@
                 <p class="card-text text-start">{{ bill.waiter.waiterName }} {{ bill.waiter.waiterSurname }}</p>
               </div>
               <div class="row">
-                <ul class="list-group list-group-flush card-setting">
+                <ul class="list-group list-group-flush">
                   <li class="list-group-item">
                   </li>
                   <li class="list-group-item">

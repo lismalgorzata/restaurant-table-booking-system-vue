@@ -7,22 +7,6 @@
         <p class="title">Restaurant Table Booking System</p>
       </div>
       <div class="right">
-        <div @click="goToMainPage" class="homeIcon icon">
-          <svg xmlns="http://www.w3.org/2000/svg" 
-              width="28" 
-              height="28" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              class="feather feather-home">
-              
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-              <polyline points="9 22 9 12 15 12 15 22"/>
-          </svg>
-        </div>
         <div @click="goToReservationPage" class="reservationIcon icon">
             <svg 
                 xmlns="http://www.w3.org/2000/svg" 
@@ -57,6 +41,22 @@
                 <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
             </svg>
         </div>
+        <div @click="goToMainPage" class="homeIcon icon">
+          <svg xmlns="http://www.w3.org/2000/svg" 
+              width="28" 
+              height="28" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              class="feather feather-home">
+              
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
       </div>
     </div>
 </template>
@@ -88,7 +88,6 @@ const goToBillPage = () => {
     padding: 8px 24px;
     border-bottom: 1px solid rgb(93, 74, 53);
     background-color: #F7F1E6;
-    padding-right: 2.5%;
   }
   
 .logo {
